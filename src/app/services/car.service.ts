@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CarService {
-  apiUrl = 'https://localhost:44336/api/cars/getall';
+  apiUrl = 'https://localhost:44336/api/cars/getcardetails';
 
   constructor(private HttpClient: HttpClient) {}
 
