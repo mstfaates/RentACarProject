@@ -11,16 +11,16 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Araba Id</th>
-      <th>Müşteri Id</th>
+      <th>Araba</th>
+      <th>Müşteri</th>
       <th>Kiralama Tarihi</th>
       <th>Geri Teslim Tarihi</th>
     </tr>
   </thead>
   <tr *ngFor="let rental of rentals">
     <td>{{ rental.rentalId }}</td>
-    <td>{{ rental.carId }}</td>
-    <td>{{ rental.customerId }}</td>
+    <td>{{ rental.modelName }}</td>
+    <td>{{ rental.companyName }}</td>
     <td>{{ rental.rentDate }}</td>
     <td>{{ rental.returnDate }}</td>
   </tr>
