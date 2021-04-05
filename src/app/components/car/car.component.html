@@ -1,4 +1,4 @@
-<div>-----------------------------Araba-----------------------------</div>
+<div>------------------Araba----------------------</div>
 <div
   *ngIf="dataLoaded == false"
   class="spinner-border text-danger"
@@ -7,24 +7,20 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 <table *ngIf="dataLoaded == true" class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Marka</th>
-      <th>Renk</th>
-      <th>Model</th>
-      <th>Model Yılı</th>
-      <th>Günlük Fiyat</th>
-      <th>Açıklama</th>
-    </tr>
-  </thead>
-  <tr *ngFor="let car of cars">
-    <td>{{ car.carId }}</td>
-    <td>{{ car.brandName }}</td>
-    <td>{{ car.colorName }}</td>
-    <td>{{ car.model }}</td>
-    <td>{{ car.modelYear }}</td>
-    <td>{{ car.dailyPrice }}</td>
-    <td>{{ car.description }}</td>
-  </tr>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let car of cars">
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align:center" routerLink="/cars/details/{{car.carId}}">{{ car.model }}</h5>
+            <p class="card-text"><b>Brand:</b> {{ car.brandName }}</p>
+            <p class="card-text"><b>Color:</b> {{ car.colorName }}</p>
+            <p class="card-text"><b>Year:</b> {{ car.modelYear }}</p>
+            <p class="card-text"><b>Description:</b> {{ car.description }}</p>
+            <p class="card-text" style="text-align:center"><b>{{ car.dailyPrice }}$/Day</b></p>
+          <a class="btn btn-primary" routerLink="/cars/details/{{car.carId}}">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </table>

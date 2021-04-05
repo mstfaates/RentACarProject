@@ -1,4 +1,4 @@
-<div>-----------------------------Marka-----------------------------</div>
+<div>--------------------Marka---------------------</div>
 <div
   *ngIf="dataLoaded == false"
   class="spinner-border text-danger"
@@ -6,15 +6,13 @@
 >
   <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded == true" class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Marka</th>
-    </tr>
-  </thead>
-  <tr *ngFor="let brand of brands">
-    <td>{{ brand.brandId }}</td>
-    <td>{{ brand.name }}</td>
-  </tr>
-</table>
+
+<ul *ngIf="dataLoaded == true" class="list-group">
+  <li [class]="getAllBrandClass()" routerLink = "/cars">All Brands</li>
+  <li (click)="setCurrentBrand(brand)"
+  routerLink= "/cars/brand/{{brand.brandId}}"
+  *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)"
+  >
+  {{brand.name}}
+  </li>
+</ul>
