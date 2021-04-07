@@ -27,25 +27,25 @@ export class ColorComponent implements OnInit {
 
   setCurrentColor(color:Color){
     if(color == this.currentColor){
-      return 'list-group-item active';
+      return 'list-group-item list-group-item-action active';
     } else{
-      return 'list-group-item'
+      return 'list-group-item list-group-item-action'
     }
   }
 
   getAllColor(){
     if(!this.currentColor){
-      return 'list-group-item active'
+      return 'list-group-item list-group-item-action active'
     } else {
-      return 'list-group-item'
+      return 'list-group-item list-group-item-action'
     }
   }
 
   getCurrentColor(color: Color) {
     if(color == this.currentColor) {
-      return 'list-group-item active';
+      return 'list-group-item list-group-item-action active';
     } else {
-      return 'list-group-item'
+      return 'list-group-item list-group-item-action'
     }
   }
 }

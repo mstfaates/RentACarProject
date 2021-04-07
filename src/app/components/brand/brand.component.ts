@@ -21,7 +21,6 @@ export class BrandComponent implements OnInit {
   getBrands(){
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
-      this.dataLoaded = true;
     });
   }
 
@@ -31,17 +30,17 @@ export class BrandComponent implements OnInit {
 
   getCurrentBrandClass(brand: Brand) {
     if(brand == this.currentBrand) {
-      return 'list-group-item active';
+      return 'list-group-item list-group-item-action active';
     } else {
-      return 'list-group-item'
+      return 'list-group-item list-group-item-action'
     }
   }
 
   getAllBrandClass() {
-    if(!this.currentBrand) {
-      return 'list-group-item active'
+    if(this.currentBrand == null) {
+      return 'list-group-item list-group-item-action active'
     }else{
-      return 'list-group-item';
+      return 'list-group-item list-group-item-action';
     }
   }
 }
