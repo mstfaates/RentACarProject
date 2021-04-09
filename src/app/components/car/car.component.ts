@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
 
@@ -13,28 +14,34 @@ export class CarComponent implements OnInit {
   dataLoaded = false;
   currentCar: Car;
   filterText = '';
+  imageUrl = "https://localhost:44336/Images/"
+  defaultImage="default.jpeg";
 
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastrService:ToastrService,
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['brandId']) {
-        this.getCarsByBrandId(params['brandId']);
-      } else {
-        this.getCars();
+    this.activatedRoute.params.subscribe(params =>{
+      if(params["brandId"] && params["colorId"]){
+        this.getCarsByFilter(params["brandId"],params["colorId"])
+        console.log("if")
       }
-    });
-
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['colorId']) {
-        this.getCarsByColorId(params['colorId']);
-      } else {
-        this.getCars();
+      else if(params["colorId"]){
+        this.getCarsByColorId(params["colorId"])
       }
-    });
+      else if(params["brandId"]){
+        this.getCarsByBrandId(params["brandId"])
+      }
+      else if(params["carId"]){
+        this.getCarDetails(params["carId"]);
+      }
+      else{
+        this.getCars()
+      }
+    })
   }
 
   getCars() {
@@ -56,6 +63,23 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  getCarDetails(carId:number){
+    this.carService.getCarDetails(carId).subscribe(response => {
+      this.cars = response.data;
+      this.dataLoaded=true;
+    });
+  }
+
+  getCarsByFilter(brandId:number,colorId:number){
+    this.carService.getCarsByBrandAndColorId(brandId,colorId).subscribe(response => {
+      this.cars = response.data;
+      this.dataLoaded = true;
+      if(this.cars.length==0){
+        this.toastrService.info("Arama sonucunuza ait araç bulunamamaktadır.","Arama sonucu")
+      }
+    })
   }
 
   setCurrentCar(car: Car) {

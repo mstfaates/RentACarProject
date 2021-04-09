@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarFilterPipe } from './components/pipes/car-filter.pipe';
 import { BrandFilterPipe } from './components/pipes/brand-filter.pipe';
 import { ColorFilterPipe } from './components/pipes/color-filter.pipe';
-import { CarFilterComponent } from './components/car/car-filter/car-filter.component';
+
 
 
 @NgModule({
@@ -31,13 +32,15 @@ import { CarFilterComponent } from './components/car/car-filter/car-filter.compo
     CarFilterPipe,
     BrandFilterPipe,
     ColorFilterPipe,
-    CarFilterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ToastrModule.forRoot({
+      positionClass:"toastr-bottom-right",
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

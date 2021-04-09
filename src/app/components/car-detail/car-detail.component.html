@@ -1,4 +1,4 @@
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<!-- <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div  class="carousel-indicators">
     <button *ngFor="let image of carImages; let i = index"
       type="button" data-bs-target="#carouselExampleIndicators" attr.data-bs-slide-to="{{ i }}"
@@ -31,7 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let car of carDetails">
+      <tr *ngFor="let car of car">
         <td>{{ car.brandName }}</td>
         <td>{{ car.colorName }}</td>
         <td>{{ car.modelYear }}</td>
@@ -40,4 +40,57 @@
       </tr>
     </tbody>
   </table>
+</div> -->
+
+<div class="d-flex justify-content-center">
+  <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div  class="card mb-3">
+
+<div  class="mx-auto">
+  <br>
+
+  <table class="table table-success table-striped">
+    <body>
+    <ul class="list-group">
+      <li (click)="setCurrentCar(car)" routerLink="/cars/cardetail/{{car?.carId}}"  
+      [class]="getCurrentCarClass(car)">
+             <tr><strong>Marka: </strong> {{car?.brandName}}</tr>
+             <tr><strong>Model: </strong> {{car?.modelYear}}</tr>
+             <tr><strong>Renk: </strong> {{car?.colorName}}</tr>
+             <tr><strong>Günlük Kiralama Fiyatı: </strong> {{car?.dailyPrice |currency : 'TRY':'symbol-narrow':'1.2-2'}}</tr>
+             <tr><strong>Açıklama: </strong> {{car?.description}}</tr>
+    </li>
+    </ul>
+  </body>
+  </table>  
+
+
+  <div class="d-grid gap-2">
+    <button  routerLink="/cars/rental/{{carId}}" 
+     type="button"
+     class="btn btn-success"
+     data-bs-toggle="modal"
+     data-bs-target="#exampleModal"
+   >
+     Aracı Kirala
+   </button>
+ </div>  
+
+  <div class="card-body d-grid gap-2 mx-auto">
+    <div class="btn-group me-2">
+      <div style="margin: auto;">
+        <div
+        class="modal fade"
+        id="rentCar"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+      </div>
+    </div>
+  </div>
+
 </div>

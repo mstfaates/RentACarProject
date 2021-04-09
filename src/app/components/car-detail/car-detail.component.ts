@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarDetail } from 'src/app/models/carDetail';
+import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
 
@@ -10,29 +10,33 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  carDetails:CarDetail[]=[];
-  carImages:CarImage[];
+  carImages: CarImage[];
   carId: number;
-  imageUrl:string="https://localhost:44336/"
+  car: Car[] = [];
+  currentCar: Car;
+  imageUrl: string = 'https://localhost:44336/';
 
-  constructor(private carService: CarService, private activedRoute: ActivatedRoute) { }
+  constructor(
+    private carService: CarService,
+    private activedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.activedRoute.params.subscribe(params => {
-      if (params["carId"]){
-        this.carId=params["carId"]
-        this.getCarDetails(params["carId"])
+    this.activedRoute.params.subscribe((params) => {
+      if (params['carId']) {
+        this.carId = params['carId'];
+        this.getCarDetails(params['carId']);
       }
-    })
+    });
   }
 
-  getCarDetails(carId:number){
-    this.carService.getCarDetails(carId).subscribe(response =>{
-      this.carDetails=response.data;
-      this.carImages=this.carDetails[0].carImage;
-    })
-  }  
-  
+  getCarDetails(carId: number) {
+    this.carService.getCarDetails(carId).subscribe((response) => {
+      this.car = response.data;
+      this.carImages = this.car[0].carImage;
+    });
+  }
+
   getCurrentImageClass(image: CarImage) {
     if (image == this.carImages[0]) {
       return 'carousel-item active';
@@ -46,6 +50,18 @@ export class CarDetailComponent implements OnInit {
       return 'active';
     } else {
       return '';
+    }
+  }
+
+  setCurrentCar(car: Car){
+    this.currentCar = car;
+  }
+
+  getCurrentCarClass(car: Car) {
+    if (car == this.currentCar) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
     }
   }
 }
