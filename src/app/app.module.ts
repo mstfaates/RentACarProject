@@ -16,6 +16,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarFilterPipe } from './components/pipes/car-filter.pipe';
 import { BrandFilterPipe } from './components/pipes/brand-filter.pipe';
 import { ColorFilterPipe } from './components/pipes/color-filter.pipe';
+import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 
 
@@ -32,6 +33,7 @@ import { ColorFilterPipe } from './components/pipes/color-filter.pipe';
     CarFilterPipe,
     BrandFilterPipe,
     ColorFilterPipe,
+    CarFilterComponent,
   ],
   imports: [
     BrowserModule,
