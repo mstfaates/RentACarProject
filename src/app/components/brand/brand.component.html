@@ -1,21 +1,37 @@
-<br>
-<br>
-<div class="list-group">
-  <button
-    type="button"
-    (click)="currentBrand == null"
-    [class]="getAllBrandClass()"
-    routerLink="/cars"
-  >
-    Brands All
-  </button>
-  <button
+<br />
+<div class="mb-3">
+  <br />
+  <div class="d-grid gap-2">
+    <button class="btn btn-success" type="button">Brands</button>
+  </div>
+
+  <br />
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Search Brands"
+  />
+</div>
+
+<ul *ngIf="dataLoaded == true" class="list-group">
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ul>
+
+<ul *ngIf="dataLoaded == false" class="list-group">
+  <br />
+  <li
     (click)="setCurrentBrand(brand)"
     routerLink="/cars/brand/{{ brand.brandId }}"
-    *ngFor="let brand of brands"
-    type="button"
+    *ngFor="let brand of brands | brandFilter: filterText"
     [class]="getCurrentBrandClass(brand)"
   >
     {{ brand.name }}
-  </button>
-</div>
+  </li>
+</ul>
+

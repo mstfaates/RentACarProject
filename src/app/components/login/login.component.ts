@@ -44,20 +44,20 @@ export class LoginComponent implements OnInit {
   login(){
 
     if(this.loginForm.invalid){
-      this.toastrService.error("Bütün alanları doldurunuz","Hata");
+      this.toastrService.error("Fullfill All Areas","Error");
       return;
     }
 
     let loginModel : LoginModel = Object.assign({},this.loginForm.value);
 
     this.authService.login(loginModel).subscribe(response => {
-      this.toastrService.success(response.message,"Başarılı");
+      this.toastrService.success(response.message,"Succes");
       this.localStorageService.setToken("token",response.data.token);
       this.getCustomerByEmail(loginModel.email);
 
       return this.router.navigateByUrl("/cars");
     },responseError => {
-      return this.toastrService.error(responseError.error,"Hata");
+      return this.toastrService.error(responseError.error,"Error");
     })
   }
 

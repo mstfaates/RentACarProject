@@ -47,12 +47,12 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.invalid) {
-      this.toastrService.error("Bütün alanları doldurunuz", "Hata");
+      this.toastrService.error("Fullfil all areas", "Error");
       return;
     }
 
     if (this.registerForm.value["password"] != this.registerForm.value["confirmPassword"]) {
-      this.toastrService.error("Şifreler birbiriyle eşleşmiyor", "Hata");
+      this.toastrService.error("Passwords are not same", "Error");
       return;
     }
 
@@ -62,13 +62,13 @@ export class RegisterComponent implements OnInit {
     this.authService.register(registerModel).subscribe(response => {
       this.localStorageService.setToken("token",response.data.token);
       this.getCustomerByEmail(registerModel.email);
-      this.toastrService.success("Kayıt oldunuz", "Başarılı");
+      this.toastrService.success("Succesfull Registered", "Success");
 
       return this.router.navigateByUrl('/cars');
     }, responseError => {
       if (responseError.error.ValidationErrors) {
         for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-          this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, 'Doğrulama Hatası');
+          this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, 'Verification Error');
         }
         return;
       }

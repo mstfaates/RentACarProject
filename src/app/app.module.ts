@@ -31,6 +31,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CardSavedComponent } from './components/payment/card-saved/card-saved/card-saved.component';
+import { AuthMenuComponent } from './components/navi/auth-menu/auth-menu.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { RegisterComponent } from './components/register/register.component';
     PaymentComponent,
     ProfileComponent,
     RegisterComponent,
+    CardSavedComponent,
+    AuthMenuComponent,
   ],
   imports: [
     BrowserModule,
