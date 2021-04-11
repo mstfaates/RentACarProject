@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Brand } from 'src/app/models/brand';
+import { Color } from 'src/app/models/color';
+import { BrandService } from 'src/app/services/brand.service';
+import { CarService } from 'src/app/services/car.service';
+import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-car-add',
@@ -7,9 +15,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarAddComponent implements OnInit {
 
-  constructor() { }
+  carAddForm:FormGroup;
+  brands:Brand[];
+  colors:Color[];
+
+  brand:Brand;
+  color:Color;
+
+
+  constructor(private formBuilder:FormBuilder,private carService:CarService,
+    private toastrService:ToastrService,
+    private colorService:ColorService,
+    private brandService:BrandService,
+    private router:Router ) { }
 
   ngOnInit(): void {
+    this.createCarAddForm();
+    this.getBrands();
+    this.getColors();
+  }
+
+  getBrands(){
+    this.brandService.getBrands().subscribe(response => {
+      this.brands = response.data;
+      // this.brand = response.data[0];
+    })
+  }
+
+  getColors(){
+    this.colorService.getColors().subscribe(response => {
+      this.colors = response.data;
+      // this.color = response.data[0];
+    })
+  }
+
+
+  createCarAddForm(){
+    this.carAddForm = this.formBuilder.group({
+      brandId: ["",Validators.required],
+      colorId: ["",Validators.required],
+      modelYear:["",Validators.required],
+      dailyPrice:["",Validators.required],
+      description:["",Validators.required]
+    });
+  }
+
+  add(){
+    if(this.carAddForm.valid){
+      let carModel = Object.assign({},this.carAddForm.value)
+
+      this.carService.add(carModel).subscribe(response => {
+
+      this.toastrService.success('Car Added','Success') 
+      this.router.navigateByUrl('/cars');
+      },responseError => {
+        if(responseError.error.ValidationErrors.length > 0){
+          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+          this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage,'Verification Error');
+          }
+        }
+      })
+    }else{
+      this.toastrService.error('There are missing fields','Warning')
+    }
   }
 
 }

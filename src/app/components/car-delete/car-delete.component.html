@@ -1,1 +1,36 @@
-<p>car-delete works!</p>
+<br>
+<br>
+<br>
+
+  <table *ngIf="dataLoaded == true" id="carsTable" class="table table-striped" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Color</th>
+        <th>Model Year</th>
+        <th>Daily Rental Price</th>
+        <th>Description</th>
+        <th style="text-align: center; width: 100px">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{ car.carId }}</td>
+        <td>{{ car.brandName }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.name }}</td>
+        <td>{{ car.modelYear }}</td>
+        <td>{{ car.dailyPrice }}</td>
+        <td>{{ car.description }}</td>
+        <td>
+          <div class="d-flex justify-content-center">
+          <button routerLink="/cars/update/{{car.carId}}" class="btn btn-success px-4" style="margin-right: 20px;" >Update</button>
+          <button class="btn btn-danger px-3" (click)="delete(car)">Delete</button>
+      </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
