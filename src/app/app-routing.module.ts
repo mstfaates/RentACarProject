@@ -2,6 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarComponent } from './components/car/car.component';
+import { LoginGuard } from './guards/login.guard';
+import { RentalComponent } from './components/rental/rental.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { CarDeleteComponent } from './components/car-delete/car-delete.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { BrandDeleteComponent } from './components/brand-delete/brand-delete.component';
+import { ColorDeleteComponent } from './components/color-delete/color-delete.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:CarComponent},
@@ -16,6 +31,27 @@ const routes: Routes = [
   {path:"cars/filter/color/:colorId",component:CarComponent},
   {path:"cars/filter/brand/:brandId/color/:colorId",component:CarComponent},
 
+  {path:"rental/:carId",component:RentalComponent},
+  {path:"cars/rental/:carId",component:RentalComponent},
+  {path:"payment/:rental",component:PaymentComponent},
+
+  {path:"cars/add",component:CarAddComponent, canActivate:[LoginGuard]},
+  {path:"cars/update/:carId",component:CarUpdateComponent},
+  {path:"cars/delete",component:CarDeleteComponent},
+
+  {path:"brands/add",component:BrandAddComponent, canActivate:[LoginGuard]},
+  {path:"brands/update/:brandId",component:BrandUpdateComponent},
+  {path:"brands/delete",component:BrandDeleteComponent},
+
+  {path:"colors/add",component:ColorAddComponent, canActivate:[LoginGuard]},
+  {path:"colors/delete",component:ColorDeleteComponent},
+  {path:"colors/update/:colorId",component:ColorUpdateComponent},
+
+  {path:"login",component:LoginComponent},
+  {path:"register",component:RegisterComponent},
+  {path:"profile",component:ProfileComponent},
+
+  {path:"cardSaved",component:CarUpdateComponent}
 ];
 
 @NgModule({
