@@ -26,7 +26,7 @@ export class RentalComponent implements OnInit {
   rentDate:Date;
   returnDate:Date;
   customerId:number;
-  @Input() car:Car;//Input()?
+  @Input() car:Car;
 
 
 
@@ -63,7 +63,7 @@ export class RentalComponent implements OnInit {
   }
 
   getCustomer(){
-    this.customerService.getCustomer().subscribe(response => {
+    this.customerService.getCustomers().subscribe(response => {
       this.customers = response.data;
       this.dataLoaded=true;
     })
@@ -105,9 +105,10 @@ export class RentalComponent implements OnInit {
       carModelYear: this.car.modelYear,
       carDailyPrice: this.car.dailyPrice,
       carDescription: this.car.description,
+      model: this.car.model,
       rentDate: this.rentDate,
       returnDate: this.returnDate,
-      customerId: this.customerId
+      customerId: this.customerId,
     };
     if(createdRental.customerId == undefined || createdRental.rentDate == undefined){
       this.toastrService.error('Eksik bilgi girdiniz','Bilgilerinizi kontrol ediniz')

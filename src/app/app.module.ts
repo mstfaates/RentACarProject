@@ -17,7 +17,6 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarFilterPipe } from './components/pipes/car-filter.pipe';
 import { BrandFilterPipe } from './components/pipes/brand-filter.pipe';
 import { ColorFilterPipe } from './components/pipes/color-filter.pipe';
-import { CarFilterComponent } from './components/car-filter/car-filter.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { BrandDeleteComponent } from './components/brand-delete/brand-delete.component';
@@ -46,7 +45,6 @@ import { RegisterComponent } from './components/register/register.component';
     CarFilterPipe,
     BrandFilterPipe,
     ColorFilterPipe,
-    CarFilterComponent,
     BrandAddComponent,
     BrandDeleteComponent,
     BrandUpdateComponent,

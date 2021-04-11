@@ -13,7 +13,7 @@ export class PaymentService {
   constructor(private httpClient:HttpClient) { }
 
   pay(rental:Rental,amount:number){
-    let path = this.apiUrl + "rentals/paymentadd";//paymentadd yok(Melih'de de yok)
+    let path = this.apiUrl + "rentals/paymentadd";
     //rental.returnDate = undefined;
     this.httpClient.post<ResponseModel>(path,{payment:{amount:amount},rental:rental})
   }
