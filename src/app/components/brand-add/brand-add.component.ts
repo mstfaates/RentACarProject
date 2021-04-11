@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { BrandService } from 'src/app/services/brand.service';
 
 @Component({
   selector: 'app-brand-add',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandAddComponent implements OnInit {
 
-  constructor() { }
+  brandAddForm: FormGroup;
+
+  constructor(private brandService: BrandService, private formBuilder: FormBuilder, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
+    this.createBrandAddForm();
   }
+
+
+  createBrandAddForm() {
+    this.brandAddForm = this.formBuilder.group({
+      brandName: ["", Validators.required]
+    })
+  }
+
+  add() {
+    if (this.brandAddForm.valid) {
+      let brandModel = Object.assign({}, this.brandAddForm.value)
+
+      this.brandService.add(brandModel).subscribe(response => {
+        console.log(response);
+        this.toastrService.success('Brand Added', 'Success')
+      }, responseError => {
+        if (responseError.error.ValidationErrors.length > 0) {
+          for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+            this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage, 'Verification Error');
+          }
+        }
+      })
+    } else {
+      this.toastrService.error('There are missing fields', 'Warning')
+    }
+  }
+
 
 }

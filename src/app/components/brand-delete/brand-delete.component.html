@@ -1,1 +1,38 @@
-<p>brand-delete works!</p>
+<br />
+<br />
+<br />
+<table
+  *ngIf="dataLoaded == true"
+  id="brandsTable"
+  class="table table-striped"
+  cellspacing="0"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Brand Name</th>
+      <th style="text-align: center; width: 100px"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brands">
+      <td>{{ brand.brandId }}</td>
+      <td>{{ brand.name }}</td>
+      <td>
+        <div class="d-flex justify-content-center">
+          <button
+            routerLink="/brands/update/{{ brand.brandId }}"
+            class="btn btn-success px-4"
+            style="margin-right: 20px"
+          >
+            Update
+          </button>
+          <button class="btn btn-danger px-3" (click)="delete(brand)">
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
