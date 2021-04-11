@@ -1,1 +1,90 @@
-<p>payment works!</p>
+<div class="card mt-4">
+    <div class="card-header text-center">
+        <strong>Transaction Summary </strong>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rant Date</th>
+                    <th>PickUp Date</th>
+                    <th>Brand</th>
+                    <th>Color</th>
+                    <th>Model</th>
+                    <th>Daily Rental Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{rental.rentDate}}</td>
+                    <td>{{rental.returnDate}}</td>
+                    <td>{{rental.brandName}}</td>
+                    <td>{{rental.colorName}}</td>
+                    <td>{{rental.carModelYear}}</td>
+                    <td>{{rental.carDailyPrice | currency: "₺" }}</td>
+                    <td><strong>
+                        {{paymentAmount | currency: "₺" }}
+                    </strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card-mt-4">
+    <div class="card-header text-center">
+        <strong>Payment Transaction</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="inputbox mt-3">
+                <span>Name On Credit Card</span>
+                <input [(ngModel)]="nameOnTheCard"
+                type="text" name="name" class="form-control"
+                required="required">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="inputbox mt-3 mr-2">
+                        <span>Cart Number</span>
+                        <input [(ngModel)]="cardNumber"
+                        type="text" name="name" class="form-control"
+                        required="required">
+                        <i class="fa fa-credit-card"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex flex-row">
+                        <div class="inputbox mt-3 mr-2">
+                            <span>Exp. Date</span>
+                            <input [(ngModel)]="expirationDate"
+                            type="text" name="name" class="form-control"
+                            required="required">
+                        </div>
+                        <div class="inputbox mt-3 mr-2">
+                            <span>CVV</span>
+                            <input [(ngModel)]="cardCvv"
+                            type="text" name="name" class="form-control"
+                            required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="checkbox mb-3 text-center">
+        <label>
+          <input type="checkbox" value="remember-me" [(ngModel)]="save"> Save my credit card
+        </label>
+      </div>
+    <div class="card-footer">
+        <div class="row">
+            <button (click)="rentACar()" class="btn btn-success">
+                <strong>{{paymentAmount | currency: "₺"}}</strong> 
+                Pay
+            </button>
+        </div>
+    </div>
+    <app-card-saved (selectedCard)="selectedCard($event)"></app-card-saved>
+</div>

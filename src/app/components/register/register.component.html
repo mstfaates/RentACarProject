@@ -1,1 +1,48 @@
-<p>register works!</p>
+<body class="text-center">
+
+    <main class="form-signin">
+        <form [formGroup]="registerForm">
+            <img class="mb-4" src="{{imageUrl}}{{defaultImage}}" alt="" width="90" height="70">
+            <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+            <div class="form-floating mb-3">
+                <input formControlName="firstName" type="text" class="form-control" id="firstName"
+                    placeholder="firstName">
+                <label for="firstName">Name</label>
+            </div>
+            
+
+            <div class="form-floating mb-3">
+                <input formControlName="lastName" type="text" class="form-control" id="lastName"
+                    placeholder="lastName">
+                <label for="lastName">Surname</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input formControlName="companyName" type="text" class="form-control" id="companyName"
+                    placeholder="companyName">
+                <label for="companyName">Company Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input formControlName="email" type="email" class="form-control" id="email"
+                    placeholder="name@example.com">
+                <label for="email">E-mail</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input formControlName="password" type="password" class="form-control" id="password"
+                    placeholder="password">
+                <label for="password">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword"
+                    placeholder="confirmPassword">
+                <label for="confirmPassword">Verify Password</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="register()">Register</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        </form>
+    </main>
+</body>
